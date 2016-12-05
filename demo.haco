@@ -17,4 +17,6 @@ apt-get -y update
 apt-get -y install ruby
     SHELL
   end
+
+  config.namespace.unshare "uts"
 end
