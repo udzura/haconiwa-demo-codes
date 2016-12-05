@@ -1,7 +1,8 @@
 # -*- mode: ruby -*-
 Haconiwa.define do |config|
   config.name = "haconiwa-58f18ba7"
-  config.init_command = "/bin/bash"
+  config.init_command = ["/usr/bin/ruby", "-e", "loop{sleep 1}"]
+  config.daemonize!
   root = Pathname.new("/var/lib/haconiwa/58f18ba7")
   config.chroot_to root
 
@@ -16,6 +17,11 @@ Haconiwa.define do |config|
 apt-get -y update
 apt-get -y install ruby
     SHELL
+  end
+
+  config.after_spawn(sec: 60) do |base|
+    Haconiwa::Logger.info "Kill demo: #{base.pid}"
+    ::Process.kill :TERM, base.pid
   end
 
   config.namespace.unshare "uts"
