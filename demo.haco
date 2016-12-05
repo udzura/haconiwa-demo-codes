@@ -19,4 +19,10 @@ apt-get -y install ruby
   end
 
   config.namespace.unshare "uts"
+  config.namespace.unshare "mount"
+  config.namespace.unshare "pid"
+
+  config.mount_independent "procfs"
+  config.mount_independent "sysfs"
+  config.mount_independent "devtmpfs"
 end
