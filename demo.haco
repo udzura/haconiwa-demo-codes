@@ -25,4 +25,9 @@ apt-get -y install ruby
   config.mount_independent "procfs"
   config.mount_independent "sysfs"
   config.mount_independent "devtmpfs"
+
+  config.cgroup["cpuset.cpus"] = "0"
+  config.cgroup["cpuset.mems"] = "0"
+  config.cgroup["cpu.cfs_period_us"] = 100000
+  config.cgroup["cpu.cfs_quota_us"]  =  30000
 end
